@@ -1,0 +1,34 @@
+Jenkins installation steps 
+
+Use ubuntu servers for both master and slave.
+
+1) Update the new server by running -- sudo apt update
+2)  install java -- sudo apt install openjdk-17-jdk -y
+3) install wget – sudo apt install wget
+3) Download the Jenkins package  -- sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc   https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+4) Run this command --  echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]"   https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+5) Once again update the server packages --  sudo apt-get update
+6) Install Jenkins – sudo apt-get install Jenkins
+7) Enable Jenkins as a service -- sudo systemctl enable Jenkins
+8) Start Jenkins --  sudo systemctl start Jenkins
+9) Check Jenkins running or not -- sudo systemctl status Jenkins
+
+Jenkins master slave configuration
+    1) launch 2 servers in AWS console use same pem key for both and make sure you have installed the java (sudo apt install openjdk-17-jdk -y) on both slave servers 
+2) login to Jenkins UI got to settings > manage Jenkins > Nodes > New node you will get below pasted screen
+     
+
+in above screenshot add node name and select permanent agent and click on create.
+
+3) In next page select only required fields like remote root directory mention /home/ubuntu/ ref below screenshot
+       
+
+4) Here we are using the Launch method – Launch agent via SSH and under host name we need to give slave server  private ip  ref screenshot
+      
+    
+
+  4) Adding credentials ref screen shot and under private key try to add pem file content as it is so that Jenkins master server will get access to slave servers.
+   
+
+5) last step host key verification strategy select non verifying verification strategy ref screen shot    
+
